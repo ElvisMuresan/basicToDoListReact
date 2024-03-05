@@ -1,14 +1,17 @@
 import { useState } from "react";
 
-export function TodoForm({ onSubmit }) {
+export function NewTodoForm({ onSubmit }: any) {
   const [newItem, setNewItem] = useState("");
 
-  function handleSubmit(e) {
+  function handleSubmit(e: any) {
     e.preventDefault();
     if (newItem === "") return;
+
     onSubmit(newItem);
+
     setNewItem("");
   }
+
   return (
     <form onSubmit={handleSubmit} className="new-item-form">
       <div className="form-row">
@@ -19,8 +22,8 @@ export function TodoForm({ onSubmit }) {
           type="text"
           id="item"
         />
+        <button className="btn">Add</button>
       </div>
-      <button className="btn">Add</button>
     </form>
   );
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { NewTodoForm } from "./components/NewTodoForm";
+import { ToDoList } from "./components/TodoList";
 import "./styles.css";
-import { TodoForm } from "./TodoForm";
-import { TodoList } from "./TodoList";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -15,8 +15,8 @@ export default function App() {
     localStorage.setItem("ITEMS", JSON.stringify(todos));
   }, [todos]);
 
-  function addTodo(title) {
-    setTodos((currentTodos) => {
+  function addTodo(title: any) {
+    setTodos((currentTodos: any) => {
       return [
         ...currentTodos,
         { id: crypto.randomUUID(), title, completed: false },
@@ -24,9 +24,9 @@ export default function App() {
     });
   }
 
-  function toggleTodo(id, completed) {
-    setTodos((currentTodos) => {
-      return currentTodos.map((todo) => {
+  function toggleTodo(id: any, completed: any) {
+    setTodos((currentTodos: any) => {
+      return currentTodos.map((todo: any) => {
         if (todo.id === id) {
           return { ...todo, completed };
         }
@@ -35,19 +35,16 @@ export default function App() {
     });
   }
 
-  function deleteTodo(id) {
-    setTodos((currentTodos) => {
-      return currentTodos.filter((todo) => todo.id !== id);
+  function deleteToDo(id: any) {
+    setTodos((currentTodos: any) => {
+      return currentTodos.filter((todo: any) => todo.id !== id);
     });
   }
-
-  console.log(todos);
-
   return (
     <>
-      <TodoForm onSubmit={addTodo} />
-      <h1 className="header">Todo List</h1>
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+      <NewTodoForm onSubmit={addTodo} />
+      <h1 className="header">ToDo List</h1>
+      <ToDoList todos={todos} toggleTodo={toggleTodo} deleteToDo={deleteToDo} />
     </>
   );
 }
